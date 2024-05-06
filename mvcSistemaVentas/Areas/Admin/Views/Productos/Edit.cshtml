@@ -1,0 +1,131 @@
+﻿@model mvcSistemaVentas.Models.Producto
+
+@{
+    ViewData["Title"] = "Editar Producto";
+}
+
+<br />
+<br />
+<h3 class="text-center">Editar producto</h3>
+<form method="POST" asp-action="Edit">
+    <div class="row px-2 offset-1 Border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-10 offset-1 mt4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Codigo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Codigo" class="form-control" placeholder="Ingresa el Código" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Nombre"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Nombre" class="form-control" placeholder="Ingresa el Nombre" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Descripcion"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Descripcion" class="form-control" placeholder="Ingresa la Descripción" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CategoriaId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias"></select>
+                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Stock"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Stock" class="form-control" placeholder="Ingresa la Cantidad en Stock" />
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PrecioCompra"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PrecioCompra" class="form-control" placeholder="Ingresa el Precio de Compra" />
+                    <span asp-validation-for="PrecioCompra" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PrecioVenta"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PrecioVenta" class="form-control" placeholder="Ingresa el Precio de Venta" />
+                    <span asp-validation-for="PrecioVenta" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="FechaCaducidad"></label>
+                </div>
+                <div class="col-8">
+                    <input type="date" asp-for="FechaCaducidad" class="form-control" />
+                    <span asp-validation-for="FechaCaducidad" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="FechaRegistro"></label>
+                </div>
+                <div class="col-8">
+                    <input type="date" asp-for="FechaRegistro" class="form-control" />
+                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Estado"></label>
+                </div>
+                <div class="col-8">
+                    <input type="checkbox" asp-for="Estado" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+        </div>
+    </div>
+    </div>
+
+    <div class="row px-2 offset-1 mt-3">
+        <div class="col">
+            <button type="submit" class="btn btn-primary form-control">Editar Producto</button>
+        </div>
+        <div class="col">
+            <a asp-action="Index" class="btn btn-success form-control">Volver atrás</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

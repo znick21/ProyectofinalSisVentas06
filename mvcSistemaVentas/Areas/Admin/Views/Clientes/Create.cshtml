@@ -1,0 +1,98 @@
+﻿@model mvcSistemaVentas.Models.Clientela
+
+@{
+    ViewData["Title"] = "Crear Nuevo Cliente";
+}
+<br />
+<br />
+<h3 class="text-center">Crear un nuevo cliente</h3>
+<form method="POST" asp-action="Create">
+    <div class="row px-2 offset-1 Border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-10 offset-1 mt4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="NombreCompleto"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="NombreCompleto" class="form-control" placeholder="Ingresa el Nombre Completo" />
+                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="TipoDocumento"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="TipoDocumento" class="form-control">
+                        <option value="NIT">NIT</option>
+                        <option value="CI">CI</option>
+                    </select>
+                    <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Documento"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Documento" class="form-control" placeholder="Ingresa el Documento" />
+                    <span asp-validation-for="Documento" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Correo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Correo" class="form-control" placeholder="Ingresa el Correo" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Telefono"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Telefono" class="form-control" placeholder="Ingresa el Teléfono" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="FechaRegistro"></label>
+                </div>
+                <div class="col-8">
+                    <input type="date" asp-for="FechaRegistro" class="form-control" />
+                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Estado"></label>
+                </div>
+                <div class="col-8">
+                    <input type="checkbox" asp-for="Estado" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group row">
+                <div class="col-8">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

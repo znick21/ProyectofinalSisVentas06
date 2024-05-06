@@ -1,0 +1,105 @@
+﻿@model mvcSistemaVentas.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Editar Proveedor";
+}
+
+<br />
+<br />
+<h3 class="text-center">Editar Proveedor</h3>
+<form method="POST" asp-action="Edit">
+    <div class="row px-2 offset-1 Border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-10 offset-1 mt4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="RazonSocial"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="RazonSocial" class="form-control" placeholder="Ingrese Razon Social" />
+                    <span asp-validation-for="RazonSocial" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="TipoDocumento"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="TipoDocumento" class="form-control">
+                        <option value="NIT">NIT</option>
+                        <option value="CI">CI</option>
+                    </select>
+                    <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="DocumentoNit"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="DocumentoNit" class="form-control" placeholder="Ingresa el Documento o Nit" />
+                    <span asp-validation-for="DocumentoNit" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Correo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Correo" class="form-control" placeholder="Ingresa el correo" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Telefono"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Telefono" class="form-control" placeholder="Ingresa el Nro de telefono" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="FechaRegistro"></label>
+                </div>
+                <div class="col-8">
+                    <input type="date" asp-for="FechaRegistro" class="form-control" />
+                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Estado"></label>
+                </div>
+                <div class="col-8">
+                    <input type="checkbox" asp-for="Estado" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="row px-2 offset-1 mt-3">
+        <div class="col">
+            <button type="submit" class="btn btn-primary form-control">Editar Proveedor</button>
+        </div>
+        <div class="col">
+            <a asp-action="Index" class="btn btn-success form-control">Volver atrás</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

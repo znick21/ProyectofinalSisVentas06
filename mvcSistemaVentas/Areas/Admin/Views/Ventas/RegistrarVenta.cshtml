@@ -1,0 +1,50 @@
+﻿@model mvcSistemaVentas.Models.Venta
+
+@{
+    ViewData["Title"] = "Registrar Venta";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="ClientelaId" class="control-label"></label>
+        <select asp-for="ClientelaId" class="form-control" asp-items="ViewBag.Clientes"></select>
+        <span asp-validation-for="ClientelaId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdUsuario" class="control-label"></label>
+        <select asp-for="IdUsuario" class="form-control" asp-items="ViewBag.Usuario"></select>
+        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+    </div>
+    <!-- Aquí puedes agregar campos adicionales según tus necesidades -->
+    <!-- Aquí puedes agregar la tabla para ingresar los detalles de la venta -->
+    <table class="table" id="tblDetalleVenta">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <!-- Puedes agregar más columnas según tus necesidades, como Precio de Venta, Subtotal, etc. -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí puedes iterar sobre los productos disponibles y permitir al usuario ingresar la cantidad -->
+            @foreach (var producto in ViewBag.Productos)
+            {
+                <tr>
+                    <td>@producto.Nombre</td>
+                    <td><input type="number" name="productos[@producto.Id]" class="form-control" /></td>
+                    <!-- Puedes agregar más campos según tus necesidades -->
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Guardar Venta</button>
+</form>
+
+@section Scripts {
+    <script>
+        // Aquí puedes colocar tu lógica JavaScript para manejar la interacción con la vista, como validar los campos o enviar la solicitud al servidor
+    </script>
+}

@@ -1,0 +1,132 @@
+﻿@model mvcSistemaVentas.Models.Venta
+
+@{
+    ViewData["Title"] = "Registrar Venta";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" id="ventaForm">
+    <div class="form-group">
+        <label asp-for="ClientelaId" class="control-label"></label>
+        <select asp-for="ClientelaId" class="form-control" asp-items="ViewBag.Clientes"></select>
+        <span asp-validation-for="ClientelaId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdUsuario" class="control-label"></label>
+        <select asp-for="IdUsuario" class="form-control" asp-items="ViewBag.Usuario"></select>
+        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+    </div>
+    <!-- Aquí puedes agregar campos adicionales según tus necesidades -->
+    <!-- Agregar tabla para los detalles de la venta -->
+    <table class="table" id="tblDetalleVenta">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Producto</th>
+                <th>Precioenta</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se agregarán los detalles de la venta -->
+        </tbody>
+    </table>
+
+    <!-- Botón para agregar producto -->
+    <button type="button" id="btnAgregarProducto" class="btn btn-primary">Agregar Producto</button>
+
+    <!-- Mostrar el monto total y el cambio -->
+    <div class="form-group">
+        <label for="montoPago">Monto Pagado</label>
+        <input type="number" id="montoPago" name="montoPago" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="montoTotal">Monto Total</label>
+        <input type="text" id="montoTotal" name="montoTotal" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <label for="montoCambio">Monto Cambio</label>
+        <input type="text" id="montoCambio" name="montoCambio" class="form-control" readonly>
+    </div>
+
+    <!-- Botón para guardar la venta -->
+    <button type="submit" class="btn btn-success">Guardar Venta</button>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var productos = @Html.Raw(Json.Serialize(ViewBag.Productos));
+
+            // Función para buscar un producto por código
+            function buscarProducto(codigo) {
+                return productos.find(function (producto) {
+                    return producto.codigo === codigo;
+                });
+            }
+
+            // Función para agregar una fila a la tabla de detalles de venta
+            function agregarFila(producto) {
+                var fila = `<tr data-id="${producto.id}">
+                                        <td>${producto.codigo}</td>
+                                        <td>${producto.nombre}</td>
+                                        <td>${producto.precioVenta}</td>
+                                        <td><input type="number" class="form-control cantidad" value="1" min="1"></td>
+                                        <td class="subtotal">${producto.precio}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btnEliminar">Eliminar</button>
+                                        </td>
+                                    </tr>`;
+                $('#tblDetalleVenta tbody').append(fila);
+            }
+
+            // Evento click del botón Agregar Producto
+            $('#btnAgregarProducto').click(function () {
+                var codigo = prompt('Ingrese el código del producto:');
+                var producto = buscarProducto(codigo);
+                if (producto) {
+                    agregarFila(producto);
+                    calcularMontoTotal();
+                } else {
+                    alert('Producto no encontrado.');
+                }
+            });
+
+            // Evento change de la cantidad de productos
+            $('#tblDetalleVenta').on('change', '.cantidad', function () {
+                var cantidad = parseInt($(this).val());
+                var precio = parseFloat($(this).closest('tr').find('td:eq(2)').text());
+                var subtotal = cantidad * precio;
+                $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+                calcularMontoTotal();
+            });
+
+            // Evento click del botón Eliminar
+            $('#tblDetalleVenta').on('click', '.btnEliminar', function () {
+                $(this).closest('tr').remove();
+                calcularMontoTotal();
+            });
+
+            // Función para calcular el monto total y el cambio
+            function calcularMontoTotal() {
+                var total = 0;
+                $('.subtotal').each(function () {
+                    total += parseFloat($(this).text());
+                });
+                var montoPago = parseFloat($('#montoPago').val()) || 0;
+                $('#montoTotal').val(total.toFixed(2));
+                $('#montoCambio').val((montoPago - total).toFixed(2));
+            }
+
+            // Evento submit del formulario
+            $('#ventaForm').submit(function (e) {
+                e.preventDefault();
+                // Aquí puedes enviar los datos al servidor para guardar la venta
+                // Puedes obtener los detalles de la venta iterando sobre las filas de la tabla
+            });
+        });
+    </script>
+}

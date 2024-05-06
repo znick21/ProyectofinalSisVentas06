@@ -1,0 +1,80 @@
+﻿@model mvcSistemaVentas.Models.Venta
+
+@{
+    ViewData["Title"] = "Editar Venta";
+}
+
+<br />
+<br />
+<h3 class="text-center">Editar Venta</h3>
+<form method="POST" asp-action="Edit">
+    <div class="row px-2 offset-1 Border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-10 offset-1 mt4">
+     
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ClientelaId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="ClientelaId" class="form-control" asp-items="@ViewBag.Clientes"></select>
+                    <span asp-validation-for="ClientelaId" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="MontoPago"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="MontoPago" class="form-control" placeholder="Ingresa el Monto de Pago" />
+                    <span asp-validation-for="MontoPago" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="MontoCambio"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="MontoCambio" class="form-control" placeholder="Ingresa el Monto de Cambio" />
+                    <span asp-validation-for="MontoCambio" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="MontoTotal"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="MontoTotal" class="form-control" placeholder="Ingresa el Monto Total" />
+                    <span asp-validation-for="MontoTotal" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="FechaRegistro"></label>
+                </div>
+                <div class="col-8">
+                    <input type="date" asp-for="FechaRegistro" class="form-control" />
+                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <div class="row px-2 offset-1 mt-3">
+        <div class="col">
+            <button type="submit" class="btn btn-primary form-control">Guardar Cambios</button>
+        </div>
+        <div class="col">
+            <a asp-action="Index" class="btn btn-secondary form-control">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
